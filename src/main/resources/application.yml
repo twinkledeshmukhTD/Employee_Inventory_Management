@@ -1,0 +1,71 @@
+server:
+  port: 8082
+  http2:
+    enabled: true
+  compression:
+    enabled: true
+    mime-types: charset=utf-8,application/json
+    min-response-size: 1024
+  servlet:
+    context-path: /employeeInventory/
+  max-http-header-size: 12800
+  connection-timeout: 10s
+#  ssl:
+#    trust-store: classpath:si_cert.p12
+#    trust-store-password: innoeye
+#    enabled: false
+
+spring:
+  resources:
+    add-mappings: false
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration
+  jpa:
+    database: mysql
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+#  spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
+
+
+  datasource:
+#    type: org.apache.tomcat.jdbc.pool.DataSource
+#    platform: mysql
+    url: jdbc:mysql://localhost:3306/EMPLOYEE_INVENTORY_MGMT?allowLoadLocalInfile=true&serverTimezone=UTC
+    username: rootip
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+   # data: classpath:configDataLocal.sql
+    tomcat:
+      initial-size: 10
+      max-wait: 300000
+      max-active: 200
+      max-idle: 30
+      min-idle: 5
+      timeBetweenEvictionRunsMillis: 120000
+      minEvictableIdleTimeMillis: 600000
+      removeAbandoned: true
+      removeAbandonedTimeout: 60
+
+
+javamelody:
+  # Enable JavaMelody auto-configuration (optional, default: true)
+  enabled: true
+  # Data source names to exclude from monitoring (optional, comma-separated)
+  excluded-datasources: secretSource,topSecretSource
+  # Enable monitoring of Spring services and controllers (optional, default: true)
+  spring-monitoring-enabled: true
+  # Initialization parameters for JavaMelody (optional)
+  # See: https://github.com/javamelody/javamelody/wiki/UserGuide#6-optional-parameters
+  init-parameters:
+    # log http requests:
+    log: true
+
+

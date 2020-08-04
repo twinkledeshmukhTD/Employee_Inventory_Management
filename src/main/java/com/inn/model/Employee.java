@@ -20,7 +20,7 @@ public class Employee extends BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "employeeid_pk" ,columnDefinition = "INT")
-    private Long id;
+    private Integer id;
 
     @Column(name = "first_name")
     private String firstName;

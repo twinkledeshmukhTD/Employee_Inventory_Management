@@ -1,9 +1,31 @@
 package com.inn.service.impl;
 
-import lombok.extern.slf4j.Slf4j;
+import com.inn.dao.IEmployeeDao;
+import com.inn.model.Employee;
+import com.inn.service.IEmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("EmployeeServiceImpl")
-@Slf4j
-public class EmployeeServiceImpl {
+public class EmployeeServiceImpl implements IEmployeeService {
+
+    @Autowired
+    private IEmployeeDao employeeDao;
+
+    @Override
+    public Employee create(Employee empDetails) {
+        return employeeDao.save(empDetails);
+    }
+
+    @Override
+    public Employee update(Employee empDetails) {
+        return employeeDao.save(empDetails);
+    }
+
+    @Transactional
+    @Override
+    public void delete(Integer id) {
+         employeeDao.deleteById(id);
+    }
 }
